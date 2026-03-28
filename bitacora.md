@@ -107,3 +107,92 @@ El sistema está próximo a pasar a la fase de definición técnica y posterior 
 - Se decidió mantener separación entre documentación para cliente y decisiones estratégicas internas.
 - Se priorizó claridad y orden por sobre velocidad de implementación.
 - Se evitó iniciar desarrollo sin tener una base sólida definida.
+
+## Día 2 - 28/03/2026
+
+### Hito
+Inicio del desarrollo backend real con FastAPI y PostgreSQL.
+
+### Contexto
+Se dejó atrás la fase puramente documental y se comenzó la implementación del backend del proyecto TuristGo, manteniendo una estructura ordenada por capas (routes, services, schemas, models, db).
+
+Durante la jornada se avanzó desde una API básica en memoria hasta una integración real con PostgreSQL.
+
+### Trabajo realizado
+
+#### 1. Base del backend
+- Se configuró `main.py` con FastAPI
+- Se levantó el servidor correctamente
+- Se creó el endpoint raíz `/`
+- Se registró el router de reservas en `main.py`
+
+#### 2. Schema inicial
+- Se creó el modelo `Reserva` en `schemas.py`
+- Se definieron campos de entrada y salida para reservas
+- Se configuró soporte ORM en el schema
+- Se agregó el campo `id` para exponer identificadores generados por base de datos
+
+#### 3. Rutas y lógica de reservas
+- Se creó el módulo `routes.py`
+- Se implementaron endpoints:
+  - `GET /reservas`
+  - `POST /reservas`
+- Se separó la lógica de negocio hacia `services.py`
+- Se evitó duplicidad de lógica entre rutas y servicios
+
+#### 4. Validaciones iniciales
+- Se implementó validación para evitar reservas duplicadas
+- Se capturó el error en `routes.py`
+- Se devolvió respuesta HTTP 400 con mensaje claro para el cliente
+
+#### 5. PostgreSQL
+- Se conectó pgAdmin al servidor local PostgreSQL
+- Se reorganizó pgAdmin para trabajar con un solo servidor y múltiples bases de datos
+- Se creó la base de datos `turistgo_db`
+- Se configuró `database.py` con SQLAlchemy
+- Se creó el modelo ORM `ReservaModel` en `models.py`
+- Se generó la tabla `reservas` en PostgreSQL desde el código
+- Se reemplazó la lista en memoria por persistencia real en base de datos
+
+#### 6. Verificación
+- Se probó inserción real desde la API
+- Se verificó la persistencia en PostgreSQL con consulta SQL directa
+- Se comprobó que los datos se almacenan correctamente en la tabla `reservas`
+
+### Decisiones tomadas
+- Mantener una arquitectura simple pero ordenada
+- Separar responsabilidades entre:
+  - routes
+  - services
+  - schemas
+  - models
+  - db
+- Utilizar PostgreSQL desde el inicio del proyecto
+- Trabajar con un único servidor PostgreSQL y múltiples bases de datos por proyecto
+
+### Problemas encontrados
+- El agente de IA en VS Code realizó cambios inesperados en estructura al inicio
+- Se corrigió la estructura del proyecto manualmente
+- Hubo bloqueos repetidos del puerto 8000 al reiniciar el servidor
+- Se resolvió utilizando cierre de procesos o puertos alternativos
+
+### Aprendizajes clave
+- Diferencia entre validaciones de estructura (Pydantic) y validaciones de negocio (services)
+- Diferencia entre schema y modelo ORM
+- Importancia de `include_router` en FastAPI
+- Importancia de `orm_mode` / compatibilidad ORM en la serialización de respuestas
+- Flujo completo entre API, lógica de negocio y base de datos
+
+### Estado actual del proyecto
+El backend ya permite:
+- crear reservas
+- listar reservas
+- validar duplicados
+- guardar datos en PostgreSQL
+
+### Próximos pasos
+1. Implementar `DELETE /reservas/{id}`
+2. Implementar `PUT` o `PATCH` para actualización de reservas
+3. Mejorar validaciones
+4. Pulir respuestas HTTP
+5. Evaluar separación futura de schemas de entrada y salida
