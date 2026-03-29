@@ -1,9 +1,8 @@
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Reserva(BaseModel):
-    id: Optional[int] = None
     nombre_cliente: str
     apellido_cliente: str
     documento_cliente: str
@@ -11,8 +10,17 @@ class Reserva(BaseModel):
     hora_servicio: str
     aerolinea: str
     numero_vuelo: str
-    cantidad_pasajeros: int
+    cantidad_pasajeros: int = Field(ge=0, le=3)
     observaciones: Optional[str] = None
+
+class ReservaCreate(Reserva):
+    pass
+
+class ReservaUpdate(Reserva):
+    pass
+
+class ReservaResponse(Reserva):
+    id: int
 
 class Config:
     orm_mode = True

@@ -197,7 +197,7 @@ El backend ya permite:
 4. Pulir respuestas HTTP
 5. Evaluar separación futura de schemas de entrada y salida
 
-## Día 3 - 29/03/2026
+## Día 3 - 28/03/2026
 
 ### Hito
 Implementación completa de operaciones CRUD sobre reservas con persistencia en PostgreSQL.
@@ -247,3 +247,53 @@ El sistema cuenta con un backend completamente funcional para la gestión de res
 - Mejorar validaciones con Pydantic
 - Implementar autenticación (futuro)
 - Comenzar desarrollo del frontend
+
+## Día 4 - 29/03/2026
+
+### Hito
+Refactor profesional del backend y cierre de la fase backend MVP.
+
+### Trabajo realizado
+
+#### 1. Refactor de schemas
+- Se reorganizaron los schemas de reservas según su función:
+  - `Reserva` como clase base con campos comunes
+  - `ReservaCreate` para creación
+  - `ReservaUpdate` para actualización
+  - `ReservaResponse` para respuestas del sistema
+- Se eliminó la necesidad de enviar `id` en operaciones de creación y actualización
+- Se mantuvo `id` únicamente en respuestas
+
+#### 2. Integración del refactor
+- Se actualizaron los endpoints para usar los nuevos schemas
+- Se ajustaron imports en `routes.py` y `services.py`
+- Se verificó en Swagger que:
+  - `POST /reservas` no solicita `id`
+  - `PUT /reservas/{id}` no solicita `id`
+  - las respuestas siguen incluyendo `id`
+
+#### 3. Validaciones Pydantic
+- Se agregó validación para `cantidad_pasajeros`
+- Regla implementada:
+  - debe ser mayor que 0
+  - debe ser menor o igual a 3
+- Se verificó correctamente el rechazo de datos inválidos mediante error `422`
+
+### Estado actual
+El backend del MVP quedó cerrado y operativo, listo para ser consumido por un frontend.
+
+### Resultado del backend
+El sistema ya permite:
+- listar reservas
+- obtener reservas por id
+- crear reservas
+- actualizar reservas
+- eliminar reservas
+- validar duplicados
+- validar cantidad máxima de pasajeros
+- persistir datos en PostgreSQL
+
+### Próximos pasos
+1. Actualizar README técnico si es necesario
+2. Realizar commit y push de cierre del backend
+3. Iniciar planificación y desarrollo del frontend

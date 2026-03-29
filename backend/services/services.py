@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from db.database import SessionLocal
 from models.models import ReservaModel
-from schemas.schemas import Reserva
+from schemas.schemas import Reserva, ReservaCreate, ReservaUpdate
 
 
 def obtener_reservas():
@@ -19,7 +19,7 @@ def obtener_reserva_por_id(reserva_id: int):
     finally:
         db.close()
 
-def crear_reserva(reserva: Reserva):
+def crear_reserva(reserva: ReservaCreate):
     db: Session = SessionLocal()
     try:
         existe = db.query(ReservaModel).filter(
@@ -66,7 +66,7 @@ def eliminar_reserva(reserva_id: int):
         db.close()
 
 
-def actualizar_reserva(reserva_id: int, reserva_data: Reserva):
+def actualizar_reserva(reserva_id: int, reserva_data: ReservaUpdate):
     db: Session = SessionLocal()
     try:
         reserva = db.query(ReservaModel).filter(ReservaModel.id == reserva_id).first()
