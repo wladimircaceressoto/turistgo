@@ -196,3 +196,54 @@ El backend ya permite:
 3. Mejorar validaciones
 4. Pulir respuestas HTTP
 5. Evaluar separación futura de schemas de entrada y salida
+
+## Día 3 - 29/03/2026
+
+### Hito
+Implementación completa de operaciones CRUD sobre reservas con persistencia en PostgreSQL.
+
+### Trabajo realizado
+
+#### 1. GET por ID
+- Se implementó `GET /reservas/{id}`
+- Se agregó función `obtener_reserva_por_id` en services
+- Se manejó error 404 cuando la reserva no existe
+
+#### 2. DELETE
+- Se implementó `DELETE /reservas/{id}`
+- Se agregó función `eliminar_reserva`
+- Se validó eliminación correcta en base de datos
+- Se manejó error 404 cuando la reserva no existe
+
+#### 3. UPDATE
+- Se implementó `PUT /reservas/{id}`
+- Se agregó función `actualizar_reserva`
+- Se actualizaron todos los campos del modelo
+- Se implementó validación para evitar duplicados en actualización
+- Se manejaron errores:
+  - 404 (no existe)
+  - 400 (duplicado)
+
+#### 4. Pruebas completas
+Se realizaron pruebas en Swagger:
+
+- Creación de reservas ✔️
+- Listado de reservas ✔️
+- Búsqueda por ID ✔️
+- Eliminación ✔️
+- Actualización ✔️
+- Validación de duplicados ✔️
+- Manejo de errores HTTP ✔️
+
+#### 5. Verificación en PostgreSQL
+- Se confirmó que todas las operaciones afectan correctamente la tabla `reservas`
+- Se verificó persistencia real mediante consultas SQL
+
+### Estado actual
+El sistema cuenta con un backend completamente funcional para la gestión de reservas.
+
+### Próximos pasos
+- Refactor de schemas (separar entrada/salida)
+- Mejorar validaciones con Pydantic
+- Implementar autenticación (futuro)
+- Comenzar desarrollo del frontend

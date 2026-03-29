@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 
 from schemas.schemas import Reserva
-from services.services import obtener_reservas, crear_reserva
+from services.services import obtener_reservas, obtener_reserva_por_id, crear_reserva, eliminar_reserva, actualizar_reserva
 
 router = APIRouter(prefix="/reservas", tags=["reservas"])
 
@@ -12,11 +12,40 @@ def listar_reservas():
     """Devuelve todas las reservas existentes."""
     return obtener_reservas()
 
+@router.get("/{reserva_id}", response_model=Reserva)
+def obtener_reserva(reserva_id: int):
+    """Devuelve una reserva específica por su ID."""
+    reserva = obtener_reserva_por_id(reserva_id)
+    if not reserva:
+        raise HTTPException(status_code=404, detail="Reserva no encontrada")
+    return reserva
 
 @router.post("", response_model=Reserva, status_code=201)
 def registrar_reserva(reserva: Reserva):
-    """Agrega una reserva nueva en memoria."""
+    """Agrega una reserva nueva en la base de datos."""
     try:
         return crear_reserva(reserva)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.delete("/{reserva_id}", response_model=Reserva)
+def eliminar_reserva_endpoint(reserva_id: int):
+    """Elimina una reserva específica por su ID."""
+    reserva = eliminar_reserva(reserva_id)
+    if reserva is None:
+        raise HTTPException(status_code=404, detail="Reserva no encontrada")
+    return reserva
+
+
+@router.put("/{reserva_id}", response_model=Reserva)
+def actualizar_reserva_endpoint(reserva_id: int, reserva: Reserva):
+    """Actualiza una reserva específica por su ID."""
+    try:
+        reserva_actualizada = actualizar_reserva(reserva_id, reserva)
+        if reserva_actualizada is None:
+            raise HTTPException(status_code=404, detail="Reserva no encontrada")
+        return reserva_actualizada
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
