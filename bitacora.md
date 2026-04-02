@@ -297,3 +297,72 @@ El sistema ya permite:
 1. Actualizar README técnico si es necesario
 2. Realizar commit y push de cierre del backend
 3. Iniciar planificación y desarrollo del frontend
+
+## Día 5 - 01/04/2026
+
+### Hito
+Implementación del frontend inicial y conexión completa con el backend.
+
+### Trabajo realizado
+
+#### 1. Estructura del frontend
+- Se creó la estructura base del frontend:
+  - index.html
+  - css/styles.css
+  - js/app.js
+- Se definió un layout tipo panel administrativo:
+  - formulario de creación de reservas
+  - tabla de visualización
+
+#### 2. Diseño visual (CSS)
+- Se aplicaron estilos básicos utilizando paleta basada en el logo:
+  - azul principal
+  - naranjo de acento
+  - fondo claro
+- Se diseñó un panel limpio y centrado
+- Se estilizaron inputs, botones y tabla
+- Se implementaron estados hover y focus
+
+#### 3. Consumo de API (GET)
+- Se implementó función `cargarReservas()`
+- Se utilizó `fetch()` para consumir endpoint `/reservas`
+- Se renderizó dinámicamente la tabla desde el DOM
+- Se manejaron errores con `try/catch`
+
+#### 4. Manejo de CORS
+- Se detectó error CORS mediante consola del navegador
+- Se implementó middleware CORSMiddleware en FastAPI
+- Se permitió acceso desde frontend (puerto 5500)
+- Se validó correcta comunicación frontend-backend
+
+#### 5. Envío de datos (POST)
+- Se implementó función `enviarReserva()`
+- Se capturó el evento submit del formulario
+- Se utilizó `preventDefault()` para evitar recarga
+- Se construyó objeto JavaScript con los datos
+- Se envió la información al backend usando `fetch` (POST)
+- Se implementaron headers y serialización JSON
+- Se validó respuesta del backend
+
+#### 6. Actualización dinámica de la UI
+- Se limpió el formulario tras envío exitoso
+- Se recargó la tabla sin refrescar la página
+- Se mostró mensaje de confirmación al usuario
+
+### Estado actual
+El sistema cuenta con un flujo completo funcional:
+
+Frontend → Backend → Base de datos → Frontend
+
+### Resultado del sistema
+El usuario puede:
+- visualizar reservas existentes
+- crear nuevas reservas desde la interfaz
+- ver actualización inmediata de datos
+
+### Próximos pasos
+1. Mejorar manejo de errores del backend en frontend
+2. Implementar eliminación de reservas (DELETE)
+3. Implementar actualización de reservas (PUT)
+4. Desarrollar vitrina pública del sistema
+5. Evaluar despliegue del sistema (deploy)

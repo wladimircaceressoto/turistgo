@@ -1,0 +1,154 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5;
+    color: #333333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Contenedor principal */
+.contenedor-principal {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h1 {
+    color: #1E4D8F;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 28px;
+}
+
+h2 {
+    color: #1E4D8F;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+/* Formulario */
+#reserva-form {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    color: #333333;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333333;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #1E4D8F;
+    box-shadow: 0 0 5px rgba(30, 77, 143, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Botón */
+button[type="submit"] {
+    background-color: #1E4D8F;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+button[type="submit"]:hover {
+    background-color: #163A6B;
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+/* Secciones */
+.seccion-formulario {
+    margin-bottom: 30px;
+}
+
+.seccion-tabla {
+    margin-bottom: 0;
+}
+
+/* Tabla */
+#tabla-reservas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#tabla-reservas thead {
+    background-color: #1E4D8F;
+    color: white;
+}
+
+#tabla-reservas th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #ddd;
+}
+
+#tabla-reservas td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+#tabla-reservas tbody tr {
+    background-color: white;
+    transition: background-color 0.2s ease;
+}
+
+#tabla-reservas tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+#tabla-reservas tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+#tabla-reservas tbody tr:nth-child(even):hover {
+    background-color: #f3f3f3;
+}
