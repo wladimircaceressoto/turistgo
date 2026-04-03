@@ -1,10 +1,15 @@
+// Variable global para almacenar el ID de la reserva que se está editando
+let reservaEditandoId = null;
+
 // Función para cargar las reservas desde el backend
 async function cargarReservas() {
     try {
         const response = await fetch('http://127.0.0.1:8000/reservas');
+
         if (!response.ok) {
             throw new Error(`Error en la petición: ${response.status}`);
         }
+
         const reservas = await response.json();
 
         // Seleccionar el tbody de la tabla
@@ -22,7 +27,7 @@ async function cargarReservas() {
             tdId.textContent = reserva.id;
             fila.appendChild(tdId);
 
-            // Columna Nombre (nombre + apellido)
+            // Columna Nombre
             const tdNombre = document.createElement('td');
             tdNombre.textContent = `${reserva.nombre_cliente} ${reserva.apellido_cliente}`;
             fila.appendChild(tdNombre);
@@ -37,6 +42,57 @@ async function cargarReservas() {
             tdHora.textContent = reserva.hora_servicio;
             fila.appendChild(tdHora);
 
+            // Columna Acciones
+            const tdAcciones = document.createElement('td');
+
+            // Botón Editar
+            const btnEditar = document.createElement('button');
+            btnEditar.textContent = 'Editar';
+            btnEditar.addEventListener('click', () => {
+                document.getElementById('nombre_cliente').value = reserva.nombre_cliente;
+                document.getElementById('apellido_cliente').value = reserva.apellido_cliente;
+                document.getElementById('documento_cliente').value = reserva.documento_cliente;
+                document.getElementById('fecha_servicio').value = reserva.fecha_servicio;
+                document.getElementById('hora_servicio').value = reserva.hora_servicio;
+                document.getElementById('aerolinea').value = reserva.aerolinea;
+                document.getElementById('numero_vuelo').value = reserva.numero_vuelo;
+                document.getElementById('cantidad_pasajeros').value = reserva.cantidad_pasajeros;
+                document.getElementById('observaciones').value = reserva.observaciones ?? '';
+
+                // Guardar el ID de la reserva que se está editando
+                reservaEditandoId = reserva.id;
+
+                // Llevar la vista al formulario
+                document.getElementById('reserva-form').scrollIntoView({ behavior: 'smooth' });
+            });
+            tdAcciones.appendChild(btnEditar);
+
+            // Botón Eliminar
+            const btnEliminar = document.createElement('button');
+            btnEliminar.textContent = 'Eliminar';
+            btnEliminar.addEventListener('click', async () => {
+                if (confirm('¿Seguro que deseas eliminar esta reserva?')) {
+                    try {
+                        const response = await fetch(`http://127.0.0.1:8000/reservas/${reserva.id}`, {
+                            method: 'DELETE'
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`Error: ${response.status}`);
+                        }
+
+                        await cargarReservas();
+                        alert('Reserva eliminada correctamente');
+                    } catch (error) {
+                        console.error('Error al eliminar la reserva:', error);
+                        alert(`Error al eliminar la reserva: ${error.message}`);
+                    }
+                }
+            });
+            tdAcciones.appendChild(btnEliminar);
+
+            fila.appendChild(tdAcciones);
+
             // Insertar la fila en el tbody
             tbody.appendChild(fila);
         });
@@ -45,64 +101,66 @@ async function cargarReservas() {
     }
 }
 
-// Función para enviar una nueva reserva al backend
+// Función para enviar una nueva reserva o actualizar una existente
 async function enviarReserva(event) {
     event.preventDefault();
 
-    // Leer los valores del formulario
-    const nombre_cliente = document.getElementById('nombre_cliente').value;
-    const apellido_cliente = document.getElementById('apellido_cliente').value;
-    const documento_cliente = document.getElementById('documento_cliente').value;
-    const fecha_servicio = document.getElementById('fecha_servicio').value;
-    const hora_servicio = document.getElementById('hora_servicio').value;
-    const aerolinea = document.getElementById('aerolinea').value;
-    const numero_vuelo = document.getElementById('numero_vuelo').value;
-    const cantidad_pasajeros = document.getElementById('cantidad_pasajeros').value;
-    const observaciones = document.getElementById('observaciones').value;
-
-    // Construir el objeto con los datos
     const datosReserva = {
-        nombre_cliente: nombre_cliente,
-        apellido_cliente: apellido_cliente,
-        documento_cliente: documento_cliente,
-        fecha_servicio: fecha_servicio,
-        hora_servicio: hora_servicio,
-        aerolinea: aerolinea,
-        numero_vuelo: numero_vuelo,
-        cantidad_pasajeros: parseInt(cantidad_pasajeros),
-        observaciones: observaciones
+        nombre_cliente: document.getElementById('nombre_cliente').value,
+        apellido_cliente: document.getElementById('apellido_cliente').value,
+        documento_cliente: document.getElementById('documento_cliente').value,
+        fecha_servicio: document.getElementById('fecha_servicio').value,
+        hora_servicio: document.getElementById('hora_servicio').value,
+        aerolinea: document.getElementById('aerolinea').value,
+        numero_vuelo: document.getElementById('numero_vuelo').value,
+        cantidad_pasajeros: parseInt(document.getElementById('cantidad_pasajeros').value),
+        observaciones: document.getElementById('observaciones').value
     };
 
     try {
-        // Enviar la petición POST al backend
-        const response = await fetch('http://127.0.0.1:8000/reservas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datosReserva)
-        });
+        let response;
+        let mensajeExito;
+
+        if (reservaEditandoId === null) {
+            // Crear nueva reserva
+            response = await fetch('http://127.0.0.1:8000/reservas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosReserva)
+            });
+            mensajeExito = 'Reserva creada correctamente';
+        } else {
+            // Actualizar reserva existente
+            response = await fetch(`http://127.0.0.1:8000/reservas/${reservaEditandoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosReserva)
+            });
+            mensajeExito = 'Reserva actualizada correctamente';
+        }
 
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
 
-        // Limpiar el formulario
         document.getElementById('reserva-form').reset();
+        reservaEditandoId = null;
 
-        // Volver a cargar las reservas
         await cargarReservas();
-
-        // Mostrar mensaje de éxito
-        alert('Reserva creada correctamente');
+        alert(mensajeExito);
     } catch (error) {
-        console.error('Error al crear la reserva:', error);
-        alert(`Error al crear la reserva: ${error.message}`);
+        const accion = reservaEditandoId === null ? 'crear' : 'actualizar';
+        console.error(`Error al ${accion} la reserva:`, error);
+        alert(`Error al ${accion} la reserva: ${error.message}`);
     }
 }
 
 // Capturar el evento de envío del formulario
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const formulario = document.getElementById('reserva-form');
     formulario.addEventListener('submit', enviarReserva);
 
