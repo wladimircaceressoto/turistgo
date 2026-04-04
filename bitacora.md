@@ -366,3 +366,112 @@ El usuario puede:
 3. Implementar actualización de reservas (PUT)
 4. Desarrollar vitrina pública del sistema
 5. Evaluar despliegue del sistema (deploy)
+
+## Día 6 - 02/04/2026
+
+### 🔥 Avances del día
+
+✅ Frontend Fase 1 completado (Panel Administrativo)
+
+Se implementó interfaz completa para gestión de reservas:
+
+- Formulario para crear reservas conectado al backend (POST)
+- Tabla dinámica que muestra reservas desde la API (GET)
+- Botón "Editar" que:
+  - Carga los datos en el formulario
+  - Permite modificar la reserva
+  - Ejecuta actualización mediante PUT
+- Botón "Eliminar" con confirmación (DELETE)
+- Recarga dinámica de datos sin refrescar la página
+
+### 🧠 Aprendizajes clave
+
+- Uso de `fetch` para comunicación frontend-backend
+- Manejo de funciones asincrónicas (`async/await`)
+- Manipulación del DOM (createElement, appendChild, innerHTML)
+- Uso de eventos (`DOMContentLoaded`, `submit`, `click`)
+- Diferencia entre POST vs PUT en lógica real
+- Manejo de estado en frontend (reservaEditandoId)
+- Solución de error CORS en FastAPI
+
+### ⚠️ Problemas encontrados
+
+- Error CORS bloqueando comunicación frontend-backend
+→ Solucionado agregando CORSMiddleware en FastAPI
+
+- Código duplicado generado por agente en app.js
+→ Detectado y corregido manualmente
+
+### 🚀 Estado del proyecto
+
+- Backend: ✅ 100% funcional
+- Panel Administrativo: ✅ 100% funcional
+- Proyecto general: 🔄 listo para vitrina (frontend cliente)
+
+### 🎯 Próximo paso
+
+➡️ Diseñar e implementar la "Vitrina TuristGo" (interfaz para cliente final)
+
+## Día 7 - 03/04/2026
+
+### ✅ Avances de la sesión
+
+#### 1. Vitrina pública TuristGo
+Se continuó el desarrollo de la página pública del sistema (vitrina.html), logrando una versión visual y funcional mucho más cercana al producto final.
+
+#### 2. Mejora visual de la vitrina
+- Se incorporó el logo real de TuristGo en el header.
+- Se ajustó el hero principal para centrar mejor el H1 y el botón de “Consultar disponibilidad”.
+- Se crearon e integraron imágenes reales/generadas para las 3 cards de servicios:
+  - Aeropuerto → Hotel
+  - Hotel → Aeropuerto
+  - City Tour Santiago
+- Se verificó que la navegación del menú funciona correctamente con scroll interno.
+
+#### 3. JavaScript de la vitrina
+Se implementó lógica inicial en vitrina.js para el formulario rápido del hero:
+- captura de datos del formulario rápido
+- validación de campos obligatorios
+- simulación temporal de disponibilidad
+- mensaje comercial de no disponibilidad
+- copia automática de datos al formulario completo
+- scroll suave hacia la sección de reserva
+
+#### 4. Validaciones realizadas
+Se probó correctamente el comportamiento del hero:
+- con hora bloqueada se muestra mensaje de no disponibilidad
+- con hora disponible se completa el formulario completo y se hace scroll a la reserva
+
+### 🧠 Definiciones funcionales importantes
+Durante la sesión se definió el plan maestro del sistema en dos fases:
+
+#### V1 (primer deploy)
+- entidad Servicio
+- relación Reserva → Servicio mediante servicio_id
+- nuevos campos en reserva: origen y destino
+- CRUD de servicios
+- disponibilidad real con margen horario
+- validación final anti-colisión al guardar reserva
+- correo automático a la clienta
+- panel admin con mantención de servicios
+- vitrina conectada a backend real
+
+#### V2 (evolución)
+- tabla tarifaria por comuna
+- cálculo automático de precios
+- capacidad máxima de reservas por bloque horario
+- soporte para múltiples vehículos
+- WhatsApp automático
+- mejoras operativas y filtros avanzados
+
+### 🚀 Estado actual del proyecto
+- Backend CRUD reservas: ✅ funcional
+- Panel administrativo: ✅ funcional
+- Vitrina pública HTML/CSS/JS inicial: ✅ funcional
+- Plan maestro V1/V2: ✅ definido
+
+### 🎯 Próximo paso
+Iniciar Backend V1:
+1. diseñar entidad Servicio
+2. actualizar entidad Reserva
+3. planificar endpoints de servicios y disponibilidad real

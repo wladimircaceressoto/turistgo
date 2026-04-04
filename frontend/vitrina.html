@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuristGo - Traslados y Tours en Santiago</title>
+    <link rel="stylesheet" href="css/vitrina.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="img/logo.png" alt="TuristGo Logo">
+        </div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#quienes-somos">Quiénes somos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero principal -->
+    <section id="inicio" class="hero">
+        <h1 class="hero-title">Traslados y Tours en Santiago de Chile</h1>
+        <p class="hero-subtitle">Servicio seguro, puntual y personalizado para tu comodidad.</p>
+        <form id="form-disponibilidad" class="form-rapido">
+            <select name="servicio" class="select-servicio">
+                <option value="">Selecciona un servicio</option>
+                <option value="aeropuerto-hotel">Aeropuerto → Hotel</option>
+                <option value="hotel-aeropuerto">Hotel → Aeropuerto</option>
+                <option value="city-tour">City Tour Santiago</option>
+            </select>
+            <input type="date" name="fecha" class="input-fecha">
+            <input type="time" name="hora" class="input-hora">
+            <input type="number" name="pasajeros" placeholder="Número de pasajeros" class="input-pasajeros" min="1" max="3">
+            <p id="mensaje-disponibilidad" class="mensaje-disponibilidad"></p>
+            <button type="submit" class="btn-consultar-hero">Consultar disponibilidad</button>
+        </form>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="servicios">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="img/aeropuerto-hotel.jpg" alt="Aeropuerto → Hotel" class="card-img">
+                <h3 class="card-title">Aeropuerto → Hotel</h3>
+                <p class="card-desc">Traslado cómodo y seguro desde el aeropuerto a tu hotel en Santiago.</p>
+                <p class="card-precio">Desde $60.000</p>
+                <button class="btn-card">Reservar</button>
+            </div>
+            <div class="card">
+                <img src="img/Hotel-Aeropueto.jpg" alt="Hotel → Aeropuerto" class="card-img">
+                <h3 class="card-title">Hotel → Aeropuerto</h3>
+                <p class="card-desc">Traslado puntual desde tu hotel al aeropuerto con total comodidad.</p>
+                <p class="card-precio">Desde $60.000</p>
+                <button class="btn-card">Reservar</button>
+            </div>
+            <div class="card">
+                <img src="img/City-Tour.jpg" alt="City Tour Santiago" class="card-img">
+                <h3 class="card-title">City Tour Santiago</h3>
+                <p class="card-desc">Descubre los lugares más emblemáticos de Santiago con nuestro tour guiado.</p>
+                <p class="card-precio">Desde $80.000</p>
+                <button class="btn-card">Reservar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Cómo funciona -->
+    <section class="como-funciona">
+        <h2 class="section-title">Cómo funciona</h2>
+        <div class="pasos">
+            <div class="paso">
+                <h3 class="paso-title">1. Elige tu servicio</h3>
+                <p class="paso-desc">Selecciona el traslado o tour que mejor se adapte a tus necesidades.</p>
+            </div>
+            <div class="paso">
+                <h3 class="paso-title">2. Consulta disponibilidad</h3>
+                <p class="paso-desc">Verifica las fechas y horarios disponibles para tu reserva.</p>
+            </div>
+            <div class="paso">
+                <h3 class="paso-title">3. Reserva online</h3>
+                <p class="paso-desc">Completa el formulario de reserva y confirma tu solicitud.</p>
+            </div>
+            <div class="paso">
+                <h3 class="paso-title">4. Disfruta tu viaje</h3>
+                <p class="paso-desc">Viaja con tranquilidad sabiendo que todo está organizado.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Quiénes somos -->
+    <section id="quienes-somos" class="quienes-somos">
+        <h2 class="section-title">Quiénes somos</h2>
+        <p class="quienes-desc">TuristGo es una empresa dedicada a ofrecer servicios de traslados y tours en Santiago de Chile. Con años de experiencia en el sector turístico, nos enfocamos en brindar un servicio seguro, puntual y personalizado para que nuestros clientes disfruten de su viaje sin preocupaciones. Nuestro equipo de profesionales está comprometido con la excelencia y la satisfacción del cliente.</p>
+        <h2 class="section-title">Nuestros valores</h2>
+        <ul class="valores-list">
+            <li class="valor-item">Seguridad: Prioridad en cada traslado y tour.</li>
+            <li class="valor-item">Puntualidad: Respetamos tu tiempo en cada servicio.</li>
+            <li class="valor-item">Personalización: Adaptamos nuestros servicios a tus necesidades.</li>
+            <li class="valor-item">Atención al cliente: Estamos aquí para ayudarte en todo momento.</li>
+        </ul>
+    </section>
+
+    <!-- Formulario completo de reserva -->
+    <section id="reserva" class="reserva">
+        <h2 class="section-title">Reserva tu servicio</h2>
+        <form id="form-reserva-completa" class="form-reserva">
+            <input type="text" name="nombre" placeholder="Nombre" required class="input-nombre">
+            <input type="text" name="apellido" placeholder="Apellido" required class="input-apellido">
+            <input type="tel" name="telefono" placeholder="Teléfono" required class="input-telefono">
+            <select name="servicio" required class="select-servicio-reserva">
+                <option value="">Selecciona un servicio</option>
+                <option value="aeropuerto-hotel">Aeropuerto → Hotel</option>
+                <option value="hotel-aeropuerto">Hotel → Aeropuerto</option>
+                <option value="city-tour">City Tour Santiago</option>
+            </select>
+            <input type="date" name="fecha" required class="input-fecha-reserva">
+            <input type="time" name="hora" required class="input-hora-reserva">
+            <input type="number" name="pasajeros" placeholder="Número de pasajeros" required class="input-pasajeros-reserva" min="1" max="3">
+            <textarea name="observaciones" placeholder="Observaciones" class="textarea-observaciones"></textarea>
+            <button type="submit" class="btn-enviar">Enviar reserva</button>
+        </form>
+    </section>
+
+    <!-- Sección contacto -->
+    <section id="contacto" class="contacto">
+        <h2 class="section-title">Contacto</h2>
+        <p class="contacto-desc">¿Tienes preguntas o necesitas más información? No dudes en contactarnos:</p>
+        <ul class="contacto-list">
+            <li class="contacto-item">WhatsApp: <a href="https://wa.me/56912345678">+56 9 1234 5678</a></li>
+            <li class="contacto-item">Teléfono: <a href="tel:+56212345678">+56 2 1234 5678</a></li>
+            <li class="contacto-item">Correo: <a href="mailto:info@turistgo.cl">info@turistgo.cl</a></li>
+        </ul>
+        <p class="cta">¡Reserva ahora y vive una experiencia inolvidable en Santiago!</p>
+    </section>
+
+    <script src="js/vitrina.js"></script>
+</body>
+</html>
