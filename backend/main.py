@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.routes import router as reservas_router
 from db.database import Base, engine
-from models.models import ReservaModel
+from models.models import ReservaModel, ServicioModel
 
 app = FastAPI()
 

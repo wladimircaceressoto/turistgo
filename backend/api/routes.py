@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import APIRouter, HTTPException
 
-from schemas.schemas import Reserva, ReservaCreate, ReservaUpdate, ReservaResponse
-from services.services import obtener_reservas, obtener_reserva_por_id, crear_reserva, eliminar_reserva, actualizar_reserva
+from schemas.schemas import DisponibilidadRequest, DisponibilidadResponse, Reserva, ReservaCreate, ReservaUpdate, ReservaResponse
+from services.services import obtener_reservas, obtener_reserva_por_id, crear_reserva, eliminar_reserva, actualizar_reserva, verificar_disponibilidad
 
 router = APIRouter(prefix="/reservas", tags=["reservas"])
 
@@ -48,4 +48,10 @@ def actualizar_reserva_endpoint(reserva_id: int, reserva: ReservaUpdate):
         return reserva_actualizada
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/disponibilidad", response_model=DisponibilidadResponse)
+def verificar_disponibilidad_endpoint(data: DisponibilidadRequest):
+    """Verifica la disponibilidad real de horarios para un servicio."""
+    return verificar_disponibilidad(data)
 

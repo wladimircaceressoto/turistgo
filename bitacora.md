@@ -475,3 +475,56 @@ Iniciar Backend V1:
 1. diseñar entidad Servicio
 2. actualizar entidad Reserva
 3. planificar endpoints de servicios y disponibilidad real
+
+## Día 8 - 05/04/2026
+
+###  Logros del día
+
+Se rediseñó completamente el modelo de datos:
+Se creó la entidad Servicio
+Se actualizó la entidad Reserva incorporando:
+telefono_cliente
+origen
+destino
+servicio_id
+Se estableció relación entre Reserva y Servicio (ForeignKey + relationship)
+Se actualizó schemas.py:
+Nuevos schemas para Servicio
+Ajustes en Reserva
+  Se agregaron:
+DisponibilidadRequest
+DisponibilidadResponse
+  Se implementó lógica de negocio clave:
+Función verificar_disponibilidad en services.py
+  Regla:
+Bloqueo de ±30 minutos por reserva
+  Se creó endpoint:
+POST /reservas/disponibilidad
+Se realizó reset de base de datos:
+Eliminación de estructura anterior
+Creación de tablas nuevas (reservas, servicios)
+Validación en pgAdmin
+
+### Aprendizajes clave
+
+Diferencia entre ForeignKey y relationship
+Cómo estructurar schemas para requests/responses
+Manejo de lógica de negocio en services
+Conversión de strings a datetime para validaciones
+Flujo real backend:
+schema → service → route → DB
+
+### Problemas enfrentados
+
+Error de SQLAlchemy por modelo mal interpretado
+Resolución mediante:
+revisión de modelos
+recreación de base de datos
+
+### Próximos pasos
+
+CRUD de servicios
+Integrar disponibilidad real en vitrina
+Crear reservas desde vitrina
+Validación backend al crear reserva
+Preparación para deploy

@@ -1,8 +1,36 @@
+from datetime import datetime
 from sqlalchemy.orm import Session
 
 from db.database import SessionLocal
 from models.models import ReservaModel
-from schemas.schemas import Reserva, ReservaCreate, ReservaUpdate
+from schemas.schemas import DisponibilidadRequest, DisponibilidadResponse, Reserva, ReservaCreate, ReservaUpdate
+
+
+def verificar_disponibilidad(data: DisponibilidadRequest):
+    db: Session = SessionLocal()
+    try:
+        reservas = db.query(ReservaModel).filter(
+            ReservaModel.servicio_id == data.servicio_id,
+            ReservaModel.fecha_servicio == data.fecha_servicio
+        ).all()
+
+        hora_solicitada = datetime.strptime(data.hora_servicio, "%H:%M")
+
+        for reserva in reservas:
+            hora_reserva = datetime.strptime(reserva.hora_servicio, "%H:%M")
+            diferencia_minutos = abs(int((hora_solicitada - hora_reserva).total_seconds() / 60))
+            if diferencia_minutos <= 30:
+                return DisponibilidadResponse(
+                    disponible=False,
+                    mensaje="Ese horario ya está muy solicitado. Podemos ofrecerte una alternativa cercana."
+                )
+
+        return DisponibilidadResponse(
+            disponible=True,
+            mensaje="Horario disponible."
+        )
+    finally:
+        db.close()
 
 
 def obtener_reservas():
