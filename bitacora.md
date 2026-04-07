@@ -528,3 +528,44 @@ Integrar disponibilidad real en vitrina
 Crear reservas desde vitrina
 Validación backend al crear reserva
 Preparación para deploy
+
+## Día 9 - 06/04/2026
+
+### ✅ Avances realizados
+
+#### 1. Backend V1 validado y cerrado
+- Se probaron completamente los endpoints de reservas
+- Se probaron completamente los endpoints de servicios
+- Se validó la lógica de disponibilidad con margen de 30 minutos antes y después
+- Todas las pruebas funcionaron correctamente
+
+#### 2. Rediseño visual del panel administrativo
+Se mejoró la estructura general del panel para darle apariencia de dashboard:
+- se agregó sidebar izquierda
+- se incorporó logo de TuristGo
+- se agregó navegación interna con secciones:
+  - Crear Reserva
+  - Gestionar Reservas
+  - Gestión de Servicios
+- se reorganizó el contenido principal en módulos/secciones
+- se mejoró el CSS general del panel con layout de dos columnas, sidebar fija y tarjetas visuales
+
+### 🧠 Estado actual
+- Backend V1: 100%
+- Panel administrativo: 75%
+- Vitrina pública: 70%
+- Proyecto total: 93%
+
+### ⚠️ Pendientes inmediatos
+#### Panel administrativo
+- actualizar formulario de reservas al nuevo modelo
+- actualizar tabla de reservas
+- implementar módulo funcional de servicios
+
+#### Vitrina
+- conectar disponibilidad real con backend
+- conectar creación de reserva real
+- cargar servicios dinámicamente
+
+### 🎯 Próximo paso
+Continuar con la adaptación funcional del panel administrativo al nuevo modelo de datos.
