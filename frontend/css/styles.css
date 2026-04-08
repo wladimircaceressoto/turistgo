@@ -111,7 +111,8 @@ h2 {
 }
 
 /* Formulario */
-#reserva-form {
+#reserva-form,
+#servicio-form {
     display: grid;
     gap: 15px;
     margin-bottom: 0;
@@ -128,6 +129,8 @@ input[type="text"],
 input[type="date"],
 input[type="time"],
 input[type="number"],
+input[type="tel"],
+select,
 textarea {
     width: 100%;
     padding: 12px;
@@ -143,6 +146,8 @@ input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="time"]:focus,
 input[type="number"]:focus,
+input[type="tel"]:focus,
+select:focus,
 textarea:focus {
     outline: none;
     border-color: #1E4D8F;
@@ -177,43 +182,51 @@ button[type="submit"]:active {
 }
 
 /* Tabla */
-#tabla-reservas {
+#tabla-reservas,
+#tabla-servicios {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
 }
 
-#tabla-reservas thead {
+#tabla-reservas thead,
+#tabla-servicios thead {
     background-color: #1E4D8F;
     color: white;
 }
 
-#tabla-reservas th {
+#tabla-reservas th,
+#tabla-servicios th {
     padding: 15px;
     text-align: left;
     font-weight: 600;
     border: 1px solid #ddd;
 }
 
-#tabla-reservas td {
+#tabla-reservas td,
+#tabla-servicios td {
     padding: 12px 15px;
     border: 1px solid #ddd;
 }
 
-#tabla-reservas tbody tr {
+#tabla-reservas tbody tr,
+#tabla-servicios tbody tr {
     background-color: white;
     transition: background-color 0.2s ease;
 }
 
-#tabla-reservas tbody tr:hover {
+#tabla-reservas tbody tr:hover,
+#tabla-servicios tbody tr:hover {
     background-color: #f9f9f9;
 }
 
-#tabla-reservas tbody tr:nth-child(even) {
+#tabla-reservas tbody tr:nth-child(even),
+#tabla-servicios tbody tr:nth-child(even) {
     background-color: #fafafa;
 }
 
-#tabla-reservas tbody tr:nth-child(even):hover {
+#tabla-reservas tbody tr:nth-child(even):hover,
+#tabla-servicios tbody tr:nth-child(even):hover {
     background-color: #f3f3f3;
 }
 
@@ -223,6 +236,17 @@ button[type="submit"]:active {
     font-style: italic;
     text-align: center;
     padding: 20px;
+}
+
+/* Clases auxiliares para secciones */
+.seccion-formulario {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 0;
+}
+
+.seccion-tabla {
+    margin-top: 20px;
 }
 
 /* Responsive */

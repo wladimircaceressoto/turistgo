@@ -569,3 +569,111 @@ Se mejoró la estructura general del panel para darle apariencia de dashboard:
 
 ### 🎯 Próximo paso
 Continuar con la adaptación funcional del panel administrativo al nuevo modelo de datos.
+
+## Día 10 - 07/04/2026
+
+### 🎯 Objetivo de la sesión
+
+Avanzar en la recta final de la V1, enfocándonos en:
+Finalizar integración de servicios en backend
+Conectar panel administrativo con servicios
+Mejorar estructura y estética del panel
+
+### ⚙️ Desarrollo realizado
+
+1. Backend – Servicios (finalización completa)
+
+Se implementó CRUD completo para entidad Servicio:
+GET /servicios
+GET /servicios/{id}
+POST /servicios
+PUT /servicios/{id}
+DELETE /servicios/{id}
+Integración completa con base de datos (PostgreSQL)
+Validación de funcionamiento mediante pruebas en Swagger
+
+2. Panel Administrativo – Integración de Servicios
+
+Formulario de reservas actualizado
+Se reemplazó documento_cliente por telefono_cliente
+Se agregaron nuevos campos:
+origen
+destino
+servicio_id (select)
+Se alinearon los id del formulario con el backend
+
+Tabla de reservas mejorada
+
+Se agregó columna:
+servicio (interpretando servicio_id)
+origen
+destino
+Se ajustó lógica en JS para mostrar correctamente los datos
+
+Módulo Gestión de Servicios (nuevo)
+
+Se creó formulario para:
+nombre
+descripción
+precio_base_referencial
+estado (activo/inactivo)
+Se implementó tabla de servicios con:
+listado dinámico desde backend
+botones de editar y eliminar
+Se integraron funciones JS:
+cargarServicios()
+enviarServicio()
+
+### 3. Correcciones clave detectadas y solucionadas
+
+🔧 Problema de IDs inconsistentes
+
+El JS usaba IDs antiguos (nombre_servicio, etc.)
+Se corrigió para coincidir con HTML:
+nombre
+descripcion
+precio_base_referencial
+estado
+
+🔧 Mejora visual del panel
+
+Se implementó sidebar funcional con navegación
+Se mejoró distribución general del layout
+Se aplicó consistencia visual entre:
+formulario de reservas
+formulario de servicios
+tablas
+
+🔧 Estética final del módulo servicios
+
+Botón “Crear Servicio” reposicionado correctamente
+Tabla de servicios estilizada igual que reservas:
+encabezado azul
+filas alternadas
+hover
+padding uniforme
+
+### 4. Validaciones funcionales realizadas
+
+Crear servicio ✔
+Editar servicio ✔
+Eliminar servicio ✔
+Listar servicios ✔
+Crear reserva con servicio ✔
+Visualización correcta en tabla ✔
+
+### 🧠 Decisiones importantes
+
+Se decidió manejar servicio_id como referencia directa en reservas
+Se priorizó consistencia entre frontend y backend (nombres de campos)
+Se dejó el diseño del select de servicios para validación futura con cliente
+Se consideró el panel administrativo como cerrado para V1
+
+### Próximos pasos
+
+Conectar vitrina con backend:
+endpoint de disponibilidad
+creación real de reservas
+Validar flujo completo:
+vitrina → backend → panel
+Preparar primer deploy (demo cliente)
