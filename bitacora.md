@@ -677,3 +677,65 @@ creación real de reservas
 Validar flujo completo:
 vitrina → backend → panel
 Preparar primer deploy (demo cliente)
+
+## Día 11 - 08/04/2026
+
+## 🟢 Estado general
+Se finaliza la versión 1 (V1) del sistema TuristGo, quedando completamente funcional a nivel backend, panel administrativo y vitrina pública.
+
+---
+
+## ⚙️ Backend
+- CRUD completo de reservas implementado
+- CRUD completo de servicios implementado
+- Relación entre reservas y servicios mediante servicio_id
+- Validación de disponibilidad por bloque de 30 minutos
+- Endpoint de disponibilidad funcional
+- Base de datos PostgreSQL operativa
+
+---
+
+## 🖥️ Panel Administrativo
+- Creación, edición y eliminación de reservas
+- Visualización de reservas en tabla
+- Creación, edición y eliminación de servicios
+- Visualización de servicios en tabla
+- Sidebar funcional con navegación por secciones
+- Mejora visual general del panel (UI más profesional)
+
+---
+
+## 🌐 Vitrina (Frontend Cliente)
+- Carga dinámica de servicios desde backend
+- Visualización de servicios mediante cards
+- Visualización de precio base referencial
+- Consulta de disponibilidad conectada a backend
+- Creación de reservas reales desde vitrina
+- Integración completa frontend-backend
+
+---
+
+## 🐛 Problemas detectados y resueltos
+- Error en carga de imágenes por nombre/ruta → solucionado
+- Inconsistencias visuales en formularios → corregidas
+- Validación de disponibilidad no aplicada correctamente → solucionado
+- Diferencias entre registros antiguos y nuevos → identificado como tema de modelo
+
+---
+
+## ⚠️ Limitaciones detectadas (para V2)
+- No existe cálculo de precio final por comuna/destino
+- No se informa precio real antes de reservar
+- No existe envío de comprobante al cliente
+- Formularios aún no son dinámicos según tipo de servicio
+- Imágenes de servicios aún no administrables desde panel
+
+---
+
+## 🎯 Conclusión
+La V1 queda completamente operativa como sistema funcional base, permitiendo:
+- gestionar servicios
+- gestionar reservas
+- recibir solicitudes desde vitrina
+
+Se define V2 como etapa enfocada en operación real del negocio.

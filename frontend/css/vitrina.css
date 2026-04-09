@@ -152,7 +152,11 @@ a {
 .input-telefono,
 .input-fecha-reserva,
 .input-hora-reserva,
-.input-pasajeros-reserva,
+.input-pasajeros,
+.input-aerolinea,
+.input-numero-vuelo,
+.input-origen,
+.input-destino,
 textarea {
     width: 100%;
     padding: 14px 16px;
@@ -179,7 +183,11 @@ textarea {
 .input-telefono:focus,
 .input-fecha-reserva:focus,
 .input-hora-reserva:focus,
-.input-pasajeros-reserva:focus,
+.input-pasajeros:focus,
+.input-aerolinea:focus,
+.input-numero-vuelo:focus,
+.input-origen:focus,
+.input-destino:focus,
 textarea:focus {
     border-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 0 0 4px rgba(127, 200, 190, 0.18);

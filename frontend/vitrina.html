@@ -44,29 +44,7 @@
     <!-- Sección Servicios -->
     <section id="servicios" class="servicios">
         <h2 class="section-title">Nuestros Servicios</h2>
-        <div class="cards">
-            <div class="card">
-                <img src="img/aeropuerto-hotel.jpg" alt="Aeropuerto → Hotel" class="card-img">
-                <h3 class="card-title">Aeropuerto → Hotel</h3>
-                <p class="card-desc">Traslado cómodo y seguro desde el aeropuerto a tu hotel en Santiago.</p>
-                <p class="card-precio">Desde $60.000</p>
-                <button class="btn-card">Reservar</button>
-            </div>
-            <div class="card">
-                <img src="img/Hotel-Aeropueto.jpg" alt="Hotel → Aeropuerto" class="card-img">
-                <h3 class="card-title">Hotel → Aeropuerto</h3>
-                <p class="card-desc">Traslado puntual desde tu hotel al aeropuerto con total comodidad.</p>
-                <p class="card-precio">Desde $60.000</p>
-                <button class="btn-card">Reservar</button>
-            </div>
-            <div class="card">
-                <img src="img/City-Tour.jpg" alt="City Tour Santiago" class="card-img">
-                <h3 class="card-title">City Tour Santiago</h3>
-                <p class="card-desc">Descubre los lugares más emblemáticos de Santiago con nuestro tour guiado.</p>
-                <p class="card-precio">Desde $80.000</p>
-                <button class="btn-card">Reservar</button>
-            </div>
-        </div>
+        <div class="cards" id="contenedor-servicios"></div>
     </section>
 
     <!-- Sección Cómo funciona -->
@@ -109,18 +87,22 @@
     <section id="reserva" class="reserva">
         <h2 class="section-title">Reserva tu servicio</h2>
         <form id="form-reserva-completa" class="form-reserva">
-            <input type="text" name="nombre" placeholder="Nombre" required class="input-nombre">
-            <input type="text" name="apellido" placeholder="Apellido" required class="input-apellido">
-            <input type="tel" name="telefono" placeholder="Teléfono" required class="input-telefono">
-            <select name="servicio" required class="select-servicio-reserva">
+            <input type="text" name="nombre_cliente" placeholder="Nombre" required class="input-nombre">
+            <input type="text" name="apellido_cliente" placeholder="Apellido" required class="input-apellido">
+            <input type="tel" name="telefono_cliente" placeholder="Teléfono" required class="input-telefono">
+            <select name="servicio_id" required class="select-servicio-reserva">
                 <option value="">Selecciona un servicio</option>
                 <option value="aeropuerto-hotel">Aeropuerto → Hotel</option>
                 <option value="hotel-aeropuerto">Hotel → Aeropuerto</option>
                 <option value="city-tour">City Tour Santiago</option>
             </select>
-            <input type="date" name="fecha" required class="input-fecha-reserva">
-            <input type="time" name="hora" required class="input-hora-reserva">
-            <input type="number" name="pasajeros" placeholder="Número de pasajeros" required class="input-pasajeros-reserva" min="1" max="3">
+            <input type="date" name="fecha_servicio" required class="input-fecha-reserva">
+            <input type="time" name="hora_servicio" required class="input-hora-reserva">
+            <input type="text" name="aerolinea" placeholder="Aerolínea" class="input-aerolinea">
+            <input type="text" name="numero_vuelo" placeholder="Número de vuelo" class="input-numero-vuelo">
+            <input type="text" name="origen" placeholder="Origen" class="input-origen">
+            <input type="text" name="destino" placeholder="Destino" class="input-destino">
+            <input type="number" name="cantidad_pasajeros" placeholder="Número de pasajeros" required class="input-pasajeros" min="1" max="3">
             <textarea name="observaciones" placeholder="Observaciones" class="textarea-observaciones"></textarea>
             <button type="submit" class="btn-enviar">Enviar reserva</button>
         </form>
